@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="SuiteName" verbose="1">
+    <test name="SmokeTest">
+        <packages>
+            <package name="apiTests"></package>
+        </packages>
+        <classes>
+            <class name="apiTests.JsonBin"> </class>
+        </classes>
+    </test>
+</suite>
