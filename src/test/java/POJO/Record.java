@@ -1,12 +1,20 @@
 package POJO;
 
-import lombok.*;
 
-@Getter
-@Setter
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
+
 public class Record {
-    private String example;
+    private String recordSample;
+
+    public Record(String recordSample) {
+        super();
+        this.recordSample = recordSample;
+    }
+
+    public String getRecordSample() {
+        return recordSample;
+    }
+
+    public void setRecordSample(String recordSample) {
+        this.recordSample = recordSample;
+    }
 }

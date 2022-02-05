@@ -1,13 +1,35 @@
 package POJO;
-import lombok.*;
 
-@Getter@Setter
-@ToString
-@NoArgsConstructor@AllArgsConstructor
+/**
+ * No args constructor for use in serialization
+ *
+ */
 public class Metadata {
-    private String id;
+    private String parentId;
     private boolean _private;
-    private String createdAt;
-    private String name;
+
+    public Metadata(String parentId, boolean _private) {
+        super();
+        this.parentId = parentId;
+        this._private = _private;
+    }
+
+    public String getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
+    }
+
+    public boolean isPrivate() {
+        return _private;
+    }
+
+    public void setPrivate(boolean _private) {
+        this._private = _private;
+    }
 
 }
+
+

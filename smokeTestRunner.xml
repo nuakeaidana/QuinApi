@@ -2,10 +2,10 @@
 <suite name="SuiteName" verbose="1">
     <test name="SmokeTest">
         <packages>
-            <package name="apiTests"></package>
+            <package name="com"></package>
         </packages>
         <classes>
-            <class name="apiTests.JsonBin"> </class>
+            <class name="com.BinTests"> </class>
         </classes>
     </test>
 </suite>
