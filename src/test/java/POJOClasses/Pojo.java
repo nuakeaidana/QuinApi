@@ -1,7 +1,6 @@
-package POJO;
+package POJOClasses;
 
 import lombok.*;
-import org.testng.annotations.Test;
 
 
 @Getter

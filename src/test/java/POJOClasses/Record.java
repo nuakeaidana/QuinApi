@@ -1,4 +1,4 @@
-package POJO;
+package POJOClasses;
 
 
 import lombok.*;

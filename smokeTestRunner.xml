@@ -1,11 +1,12 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="SuiteName" verbose="1">
     <test name="SmokeTest">
-        <packages>
-            <package name="com"></package>
-        </packages>
+<!--        <packages>-->
+<!--            <package name="APITests"></package>-->
+<!--        </packages>-->
         <classes>
-            <class name="com.BinTests"> </class>
+            <class name="APITests.PositiveScenarios"> </class>
+            <class name="APITests.NegativeScenarios"> </class>
         </classes>
     </test>
 </suite>
