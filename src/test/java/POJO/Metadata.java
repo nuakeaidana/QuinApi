@@ -1,35 +1,21 @@
 package POJO;
 
-/**
- * No args constructor for use in serialization
- *
- */
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jdk.nashorn.internal.objects.annotations.Constructor;
+import lombok.*;
+
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Metadata {
-    private String parentId;
+    private String id;
+    private String createdAt;
+    @JsonProperty("private")
     private boolean _private;
-
-    public Metadata(String parentId, boolean _private) {
-        super();
-        this.parentId = parentId;
-        this._private = _private;
-    }
-
-    public String getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(String parentId) {
-        this.parentId = parentId;
-    }
-
-    public boolean isPrivate() {
-        return _private;
-    }
-
-    public void setPrivate(boolean _private) {
-        this._private = _private;
-    }
-
 }
 
 
