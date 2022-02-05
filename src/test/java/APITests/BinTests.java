@@ -40,6 +40,34 @@ public class BinTests extends TestBase {
         assertEquals(message, "Good Bye");
 
     }
+    @Test
+    public void invalidKey() {
+        Map<String, Object> header = new HashMap<>();
+        header.put(ConfigurationReader.get("key"), "$2b$10$XBmMLw9bqqmwh74dyXnZl.AltiytfMiieorVFuqsdQyTvoWGxoZc");
+        header.put("Content-Type", "application/json");
+        Map<String, Object> body = new HashMap<>();
+        body.put("sample", "No access");
+        response = given().headers(header)
+                .body(body).and().post().prettyPeek();
+        assertEquals(response.statusCode(), 401);
+        String message = response.body().path("message").toString();
+        assertEquals(message, "Invalid X-Master-Key provided");
+
+    }
+    @Test
+    public void noKey() {
+        Map<String, Object> header = new HashMap<>();
+        header.put("Content-Type", "application/json");
+        Map<String, Object> body = new HashMap<>();
+        body.put("sample", "No access");
+        response = given().headers(header)
+                .body(body).and().post().prettyPeek();
+        assertEquals(response.statusCode(), 401);
+        String message = response.body().path("message").toString();
+        assertEquals(message, "You need to pass X-Master-Key in the header");
+
+    }
+
     @Test(priority = 2)
     public void readBin() {
         Map<String, Object> header = new HashMap<>();
@@ -59,7 +87,34 @@ public class BinTests extends TestBase {
      assertEquals(message, "Good Bye");
 
     }
+    @Test
+    public void InvalidIDTest() {
+        Map<String, Object> header = new HashMap<>();
+        header.put(ConfigurationReader.get("key"), ConfigurationReader.get("token"));
+        header.put("Content-Type", "application/json");
+        Map<String, Object> body = new HashMap<>();
+        body.put("sample", "No ID");
+        response = given().accept(ContentType.JSON).and().headers(header).when()
+                .get("/"+ binID).prettyPeek();
+        assertEquals(response.statusCode(), 422);
+        String message = response.body().path("message").toString();
+        assertEquals(message, "Invalid Record ID");
 
+    }
+    @Test
+    public void noID() {
+        Map<String, Object> header = new HashMap<>();
+        header.put(ConfigurationReader.get("key"), ConfigurationReader.get("token"));
+        header.put("Content-Type", "application/json");
+        Map<String, Object> body = new HashMap<>();
+        body.put("sample", "No ID");
+        response = given().accept(ContentType.JSON).and().headers(header).when()
+                .get("/").prettyPeek();
+        assertEquals(response.statusCode(), 404);
+        String message = response.body().path("message").toString();
+        assertEquals(message, "Route not found!");
+
+    }
     @Test(priority = 3)
     public void updateBin () {
         Map<String, Object> header = new HashMap<>();
@@ -85,6 +140,7 @@ public class BinTests extends TestBase {
         String expectedResult = "Hello";
         assertEquals(actualResult, expectedResult);
     }
+
 //    @Test (priority = 5)
 //    public void pojoAssertion () {
 //        Map<String, Object> header = new HashMap<>();
@@ -112,5 +168,15 @@ public class BinTests extends TestBase {
                         .assertThat().statusCode(404);
 //                        .and().assertThat().body(matchesJsonSchemaInClasspath("SingleProjectSchema.json"));
     }
+    @Test(priority = 7)
+    public void BinAfterDeleted() {
+        Map<String, Object> header = new HashMap<>();
+        header.put(ConfigurationReader.get("key"), ConfigurationReader.get("token"));
 
+        response = given().accept(ContentType.JSON).and().headers(header).when()
+                .get("/" + binID).prettyPeek();
+        String message = response.body().path("message").toString();
+        assertEquals(response.statusCode(), 404);
+        assertEquals(message, "Bin not found or it doesn't belong to your account");
+    }
 }
