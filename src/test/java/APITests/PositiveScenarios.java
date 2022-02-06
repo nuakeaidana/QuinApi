@@ -47,16 +47,16 @@ public class PositiveScenarios extends TestBase {
         Map<String, Object> header = new HashMap<>();
         header.put(ConfigurationReader.get("key"), ConfigurationReader.get("token"));
         //sending get request
-      Response response= given().accept(ContentType.JSON).and().headers(header).when()
-                            .get("/"+binID).prettyPeek();
+        Response response= given().accept(ContentType.JSON).and().headers(header).when()
+                .get("/"+binID).prettyPeek();
         //assertion using path method
-      String message = response.body().path("record.sample");
-      //asserting status code
-     assertEquals(response.statusCode(), 200);
-     //asserting content Type
-     assertEquals(response.contentType(), "application/json; charset=utf-8");
+        String message = response.body().path("record.sample");
+        //asserting status code
+        assertEquals(response.statusCode(), 200);
+        //asserting content Type
+        assertEquals(response.contentType(), "application/json; charset=utf-8");
         //asserting message inside body is posted
-     assertEquals(message, "Good Bye");
+        assertEquals(message, "Good Bye");
     }
     //put request
     @Test(priority = 7)
@@ -68,11 +68,10 @@ public class PositiveScenarios extends TestBase {
         //edit body
         Map<String, Object> body = new HashMap<>();
         body.put("sample", "Hello");
-        //hemcrast continuous assertion, asserting status code, and edited body
+        //hamcrest continuous assertion, asserting status code, and edited body
                 given().when().headers(header).and().body(body).put("/"+binID).prettyPeek()
-                .then().assertThat().statusCode(200)
-                 .and().body("record.sample",equalTo("Hello"));
-              //and().assertThat().body(matchesJsonSchemaInClasspath("SingleProjectSchema.json")).extract().jsonPath();
+                        .then().assertThat().statusCode(200)
+                        .and().body("record.sample",equalTo("Hello"));
     }
     //sending get request as Pojo - de-serialization
     @Test (priority = 9)
@@ -96,12 +95,11 @@ public class PositiveScenarios extends TestBase {
         //valid authorization
         Map<String, Object> header = new HashMap<>();
         header.put(ConfigurationReader.get("key"), ConfigurationReader.get("token"));
-           header.put("Content-Type", "application/json");
+        header.put("Content-Type", "application/json");
                 //Hamcrest assertion
                 given().and().headers(header).when().delete("/"+binID).then()
                         .assertThat().statusCode(200).and()
                         .body("message", equalTo("Bin deleted successfully"));
-//                        .and().assertThat().body(matchesJsonSchemaInClasspath("SingleProjectSchema.json"));
 
     }
     @Test(priority = 11)

@@ -61,7 +61,7 @@ public class NegativeScenarios extends TestBase {
         Map<String, Object> body = new HashMap<>();
         body.put("sample", "No ID");
         //sending get request with invalid ID
-        Response response = given().accept(ContentType.JSON).and().headers(header).when()
+        Response response = given().accept(ContentType.JSON).and().headers(header).body(body).when()
                 .get("/"+ binID).prettyPeek();
         //assert status code
         assertEquals(response.statusCode(), 422);
@@ -79,8 +79,8 @@ public class NegativeScenarios extends TestBase {
         //valid body
         Map<String, Object> body = new HashMap<>();
         body.put("sample", "No ID");
-        //sending get request with no ID as path paarmeter
-        Response response = given().accept(ContentType.JSON).and().headers(header).when()
+        //sending get request with no ID as path parameter
+        Response response = given().accept(ContentType.JSON).and().headers(header).when().body(body)
                 .get("/").prettyPeek();
         //asserting status code
         assertEquals(response.statusCode(), 404);
