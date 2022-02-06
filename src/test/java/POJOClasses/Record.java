@@ -1,8 +1,5 @@
 package POJOClasses;
-
-
 import lombok.*;
-
 @Getter
 @Setter
 @ToString

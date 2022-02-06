@@ -3,6 +3,7 @@ package APITests;
 import static io.restassured.RestAssured.*;
 import POJOClasses.Pojo;
 import io.restassured.http.ContentType;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
@@ -73,6 +74,17 @@ public class PositiveScenarios extends TestBase {
                         .then().assertThat().statusCode(200)
                         .and().body("record.sample",equalTo("Hello"));
     }
+    //sending get request with JsonSchema
+    @Test(priority = 8)
+    public void JsonSchemaAssertion(){
+        //valid authorization
+        Map<String, Object> header = new HashMap<>();
+        header.put(ConfigurationReader.get("key"), ConfigurationReader.get("token"));
+               //JsonSchema assertion
+               given().accept(ContentType.JSON).and().headers(header).when()
+                       .get("/"+binID).then().statusCode(200).and()
+                       .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("JsonSchema.json"));
+    }
     //sending get request as Pojo - de-serialization
     @Test (priority = 9)
    public void pojoAssertion () {
@@ -89,6 +101,7 @@ public class PositiveScenarios extends TestBase {
         String expectedResult = "Hello";
         assertEquals(actualResult, expectedResult);
     }
+
     //deleting bin
     @Test(priority = 10)
     public void deleteBin () {

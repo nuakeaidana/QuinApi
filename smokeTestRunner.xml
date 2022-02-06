@@ -4,9 +4,5 @@
         <packages>
            <package name="APITests"></package>
       </packages>
-        <classes>
-            <class name="APITests.PositiveScenarios"> </class>
-            <class name="APITests.NegativeScenarios"> </class>
-        </classes>
     </test>
 </suite>

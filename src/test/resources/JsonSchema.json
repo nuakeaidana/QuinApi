@@ -1,0 +1,107 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "title": "The root schema",
+  "description": "The root schema comprises the entire JSON document.",
+  "default": {},
+  "examples": [
+    {
+      "record": {
+        "sample": "Good Bye"
+      },
+      "metadata": {
+        "id": "620034b34ce71361b8d0a266",
+        "createdAt": "2022-02-06T20:50:59.620Z",
+        "private": true
+      }
+    }
+  ],
+  "required": [
+    "record",
+    "metadata"
+  ],
+  "properties": {
+    "record": {
+      "$id": "#/properties/record",
+      "type": "object",
+      "title": "The record schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": {},
+      "examples": [
+        {
+          "sample": "Good Bye"
+        }
+      ],
+      "required": [
+        "sample"
+      ],
+      "properties": {
+        "sample": {
+          "$id": "#/properties/record/properties/sample",
+          "type": "string",
+          "title": "The sample schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "Good Bye"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "metadata": {
+      "$id": "#/properties/metadata",
+      "type": "object",
+      "title": "The metadata schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": {},
+      "examples": [
+        {
+          "id": "620034b34ce71361b8d0a266",
+          "createdAt": "2022-02-06T20:50:59.620Z",
+          "private": true
+        }
+      ],
+      "required": [
+        "id",
+        "createdAt",
+        "private"
+      ],
+      "properties": {
+        "id": {
+          "$id": "#/properties/metadata/properties/id",
+          "type": "string",
+          "title": "The id schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "620034b34ce71361b8d0a266"
+          ]
+        },
+        "createdAt": {
+          "$id": "#/properties/metadata/properties/createdAt",
+          "type": "string",
+          "title": "The createdAt schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "2022-02-06T20:50:59.620Z"
+          ]
+        },
+        "private": {
+          "$id": "#/properties/metadata/properties/private",
+          "type": "boolean",
+          "title": "The private schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": false,
+          "examples": [
+            true
+          ]
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}
