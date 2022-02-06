@@ -113,7 +113,7 @@ public class PositiveScenarios extends TestBase {
         //sending get request
         Response response = given().accept(ContentType.JSON).and().headers(header).when()
                 .get("/" + binID).prettyPeek();
-        //asserting status code and message
+        //asserting status code and body message
         String message = response.body().path("message").toString();
         assertEquals(response.statusCode(), 404);
         assertEquals(message, "Bin not found or it doesn't belong to your account");
